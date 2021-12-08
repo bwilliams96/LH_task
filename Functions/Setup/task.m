@@ -15,7 +15,7 @@ classdef task < handle
         outcome % outcome of each trial
         random % tracks whether random button was used or not
         learn %possible outcomes for initial and reversal learning periods
-        dsc %possible outcomes for descent period
+        desc %possible outcomes for descent period
         curr_trial %current trial
         
         
@@ -70,7 +70,7 @@ classdef task < handle
             task.random = zeros(task.ntrials,1);
             
             % Set trial number for first trial 
-            task.curr_trial = 1;
+            task.curr_trial = 0;
             
             %%
             % determine which stimulus will be correct and when
@@ -183,7 +183,7 @@ classdef task < handle
                out = out.'; % converts from column to row
                three(:,i) = out;
             end
-            task.dsc = cat(1,one,two,three);
+            task.desc = cat(1,one,two,three);
         end       
     end
 end
