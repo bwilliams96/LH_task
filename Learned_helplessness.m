@@ -45,58 +45,34 @@ function Learned_helplessness()
     % Get the size of the on screen window in pixels, these are the last two
     % numbers in "windowRect" 
     [screenXpixels, screenYpixels] = Screen('WindowSize', window);
-    
-    % Get the centre coordinate of the window in pixels.
-    % xCenter = screenXpixels / 2
-    % yCenter = screenYpixels / 2
-    [xCenter, yCenter] = RectCenter(windowRect);
-    
-    % Query the inter-frame-interval. This refers to the minimum possible time
-    % between drawing to the screen
-    ifi = Screen('GetFlipInterval', window);
-    
-    % We can also determine the refresh rate of our screen. The
-    % relationship between the two is: ifi = 1 / hertz
-    hertz = FrameRate(window);
-    
-    % We can also query the "nominal" refresh rate of our screen. This is
-    % the refresh rate as reported by the video card. This is rounded to the
-    % nearest integer. In reality there can be small differences between
-    % "hertz" and "nominalHertz"
-    % This is nothing to worry about. See Screen FrameRate? and Screen
-    % GetFlipInterval? for more information
-    nominalHertz = Screen('NominalFrameRate', window);
-    
-    % Here we get the pixel size. This is not the physical size of the pixels
-    % but the color depth of the pixel in bits
-    pixelSize = Screen('PixelSize', window);
-    
-    % Queries the display size in mm as reported by the operating system. Note
-    % that there are some complexities here. See Screen DisplaySize? for
-    % information. So always measure your screen size directly.
-    [width, height] = Screen('DisplaySize', screenNumber);
-    
-    % Get the maximum coded luminance level (this should be 1)
-    maxLum = Screen('ColorRange', window);
 
     %% Loading the images
     img1 = Screen('MakeTexture', window, imread("img/img1.png"));
     img2 = Screen('MakeTexture', window, imread("img/img2.png"));
     img3 = Screen('MakeTexture', window, imread("img/img3.png"));
     img4 = Screen('MakeTexture', window, imread("img/img4.png"));
+    win = Screen('MakeTexture', window, imread("img/win.png"));
+    loss = Screen('MakeTexture', window, imread("img/loss.png"));
 
     %% First, we will give the participant some instructions
     instructions('These are instructions', window, screenYpixels);
     
     %% Now we will start the task
 
+    %% INITAL LEARNING
     for i = 1:exp.blocks(1)/10
         exp.selected(i) = img(img1, img2, img3, img4, exp.loc(i,:), window, screenXpixels, screenYpixels, 2);
-        disp(exp.loc(i,:))
-        disp(exp.selected(i))
-        exp = getOutcome(exp, i, 1);
-        img_alpha(img1, img2, img3, img4, exp.loc(i,:), window, screenXpixels, screenYpixels, 2, exp.selected(i), exp.random(i));
-
+        if exp.selected(i) ~= 0
+            exp = getOutcome(exp, i, 1);
+            img_alpha(img1, img2, img3, img4, exp.loc(i,:), window, screenXpixels, screenYpixels, 2, exp.selected(i), exp.random(i));
+            if exp.outcome(i) == 1
+                sendTrigger()
+            end
+            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(i,:), window, screenXpixels, screenYpixels, 2, exp.selected(i), exp.random(i), exp.outcome(i));
+        else
+            noresp(window, screenYpixels);
+            WaitSecs(2);
+        end
         save(filename, 'exp');
     end
     %% end of task

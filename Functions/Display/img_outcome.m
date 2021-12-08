@@ -6,6 +6,8 @@
 % img2 = an image file to be displayed
 % img3 = an image file to be displayed
 % img4 = an image file to be displayed
+% win = image displayed for a win
+% loss = image displayed for a loss
 % positions = vector (length 4) with the order images are displayed. e.g.
 % [2,3,1,4] would order the images: img3, img1, img2, img4.
 % window = psychtoolbox window
@@ -14,12 +16,13 @@
 % time = time waiting 
 % selected = selected image
 % random = image selected at random if random button is pressed
+% outcome = outcome of choice
 
 %% OUTPUT:
 % returns selected image based on key pressed on button box (button order:
 % blue, yellow, green, red)
 
-function img(img1, img2, img3, img4, positions, window, screenXpixels, screenYpixels, time, selected, random)
+function img(img1, img2, img3, img4, win, loss, positions, window, screenXpixels, screenYpixels, time, selected, random, outcome)
 
     stimpos{1} = [(screenXpixels/13) (screenYpixels/4) ((screenXpixels/13)*3) (screenYpixels/(4/3))];
     stimpos{2} = [((screenXpixels/13)*4) (screenYpixels/4) ((screenXpixels/13)*6) (screenYpixels/(4/3))];
@@ -53,6 +56,12 @@ function img(img1, img2, img3, img4, positions, window, screenXpixels, screenYpi
         elseif random == 3
             Screen('DrawTexture', window, img3, [], stimpos{positions(3)}, 0, [], 0.5);
         end
+    end
+
+    if outcome == 1
+        Screen('DrawTexture', window, win, [], [], 0, [], 1);
+    elseif outcome == 0 
+        Screen('DrawTexture', window, loss, [], [], 0, [], 1);
     end
 
     Screen('Flip', window);
