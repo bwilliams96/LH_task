@@ -95,7 +95,7 @@ function Learned_helplessness()
         disp(exp.loc(i,:))
         disp(exp.selected(i))
         exp = getOutcome(exp, i, 1);
-        img_alpha(img1, img2, img3, img4, exp.loc(i,:), window, screenXpixels, screenYpixels, 2, exp.selected(i));
+        img_alpha(img1, img2, img3, img4, exp.loc(i,:), window, screenXpixels, screenYpixels, 2, exp.selected(i), exp.random(i));
 
         save(filename, 'exp');
     end
