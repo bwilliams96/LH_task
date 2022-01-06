@@ -83,13 +83,11 @@ function Learned_helplessness()
         else
             noresp(window, screenYpixels);
             WaitSecs(2);
+        [position, RT, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('g') KbName('b') KbName('r')], ...
+    'startposition', position, ...
+    'range', 2, ...
+    'aborttime', 2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
     end
 
@@ -108,12 +106,6 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
     end
 
@@ -132,12 +124,6 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
     end
 
@@ -156,12 +142,6 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
     end
 
@@ -180,12 +160,6 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
     end
     

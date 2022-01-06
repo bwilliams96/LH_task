@@ -17,6 +17,10 @@ classdef task < handle
         learn %possible outcomes for initial and reversal learning periods
         desc %possible outcomes for descent period
         curr_trial %current trial
+        pain_pos % position of pain rating [0-10]
+        pain_rt % reaction time to give pain rating in seconds
+        motiv_pos % position of motivation rating [0-10]
+        motiv_rt % reaction time to give motivation rating in seconds
         
         
     end
@@ -68,6 +72,12 @@ classdef task < handle
             task.selected = zeros(task.ntrials,1);
             task.outcome = zeros(task.ntrials,1);
             task.random = zeros(task.ntrials,1);
+
+            % Initialise variable to hold choice and RT for questions
+            task.pain_pos = zeros(task.ntrials,1);
+            task.pain_rt = zeros(task.ntrials,1);
+            task.motiv_pos = zeros(task.ntrials,1);
+            task.motiv_rt = zeros(task.ntrials,1);
             
             % Set trial number for first trial 
             task.curr_trial = 0;
