@@ -76,10 +76,6 @@ function Learned_helplessness()
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome(exp, exp.curr_trial, 1);
             img_alpha(img1, img2, img3, img4, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial));
-            if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
-            end
-            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
         else
             noresp(window, screenYpixels);
             WaitSecs(2);
@@ -91,6 +87,12 @@ function Learned_helplessness()
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
         exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
+        if exp.selected(exp.curr_trial) ~= 0
+            if exp.outcome(exp.curr_trial) == 1
+                sendTrigger()
+            end
+            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
+        end
     end
 
     %% REVERSAL LEARNING
@@ -100,10 +102,6 @@ function Learned_helplessness()
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome(exp, exp.curr_trial, 2);
             img_alpha(img1, img2, img3, img4, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial));
-            if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
-            end
-            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
         else
             noresp(window, screenYpixels);
             WaitSecs(2);
@@ -115,6 +113,12 @@ function Learned_helplessness()
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
         exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
+        if exp.selected(exp.curr_trial) ~= 0
+            if exp.outcome(exp.curr_trial) == 1
+                sendTrigger()
+            end
+            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
+        end
     end
 
     %% DESC
@@ -124,10 +128,6 @@ function Learned_helplessness()
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome_desc(exp, exp.curr_trial, 2, i);
             img_alpha(img1, img2, img3, img4, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial));
-            if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
-            end
-            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
         else
             noresp(window, screenYpixels);
             WaitSecs(2);
@@ -139,6 +139,12 @@ function Learned_helplessness()
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
         exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
+        if exp.selected(exp.curr_trial) ~= 0
+            if exp.outcome(exp.curr_trial) == 1
+                sendTrigger()
+            end
+            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
+        end
     end
 
     %% Learned helplessness
@@ -148,10 +154,6 @@ function Learned_helplessness()
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome_lh(exp, exp.curr_trial);
             img_alpha(img1, img2, img3, img4, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial));
-            if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
-            end
-            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
         else
             noresp(window, screenYpixels);
             WaitSecs(2);
@@ -163,6 +165,12 @@ function Learned_helplessness()
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
         exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
+        if exp.selected(exp.curr_trial) ~= 0
+            if exp.outcome(exp.curr_trial) == 1
+                sendTrigger()
+            end
+            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
+        end
     end
 
     %% REVERSAL LEARNING 2
@@ -172,10 +180,6 @@ function Learned_helplessness()
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome(exp, exp.curr_trial, 3);
             img_alpha(img1, img2, img3, img4, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial));
-            if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
-            end
-            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
         else
             noresp(window, screenYpixels);
             WaitSecs(2);
@@ -187,6 +191,12 @@ function Learned_helplessness()
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
         exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
         save(filename, 'exp');
+        if exp.selected(exp.curr_trial) ~= 0
+            if exp.outcome(exp.curr_trial) == 1
+                sendTrigger()
+            end
+            img_outcome(img1, img2, img3, img4, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.random(exp.curr_trial), exp.outcome(exp.curr_trial));
+        end
     end
     
     %% end of task
