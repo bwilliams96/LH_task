@@ -2,10 +2,13 @@ function Learned_helplessness()
 
     %% Miscellaneous setup
     Screen('Preference', 'SkipSyncTests', 1); %%%!!!! ONLY FOR TESTING
+    KbName('UnifyKeyNames');
     activeKeys = [KbName('b') KbName('y') KbName('g') KbName('r') KbName('t')];
+    RestrictKeysForKbCheck(activeKeys);
     %medoc = serialport(,9600)
-    medoc = 'medoc'
+    medoc = 'medoc';
     ListenChar(2);
+    HideCursor;
 
     %% This will setup the task
     addpath(genpath('./Functions'));
