@@ -7,14 +7,14 @@ function Learned_helplessness()
     RestrictKeysForKbCheck(activeKeys);
     %medoc = serialport(,9600)
     medoc = 'medoc';
-    ListenChar(2);
+    %ListenChar(2);
     HideCursor;
 
     %% This will setup the task
     addpath(genpath('./Functions'));
     %id = input('Enter participant ID: ', 's');
     id = 'test' %%%!!!! THIS IS ONLY IN FOR TESTING, DELETE AND UNCOMMENT LINE 4
-    exp = task(id,224,[75, 25; 50, 50; 25, 75],[1, 0],[50,50,20,50,50],4);
+    exp = task(id,4,[75, 25; 50, 50; 25, 75],[1, 0],[50,50,20,50,50],4);
     filename = [pwd, '/Data/', exp.id, '.mat'];
     save(filename, 'exp');
 
