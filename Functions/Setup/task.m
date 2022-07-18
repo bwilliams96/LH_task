@@ -13,7 +13,6 @@ classdef task < handle
         counts % number of times each option has been chosen, updates on each choice
         selected % option selected on each trial
         outcome % outcome of each trial
-        random % tracks whether random button was used or not
         learn %possible outcomes for initial and reversal learning periods
         desc %possible outcomes for descent period
         curr_trial %current trial
@@ -21,6 +20,15 @@ classdef task < handle
         pain_rt % reaction time to give pain rating in seconds
         motiv_pos % position of motivation rating [0-10]
         motiv_rt % reaction time to give motivation rating in seconds
+        allvec % all pressure data for button squeeze section of task
+        waitvec % pressure data for button squeeze during waiting phase
+        pressvec % pressure data for button squeeze during reaction phase
+        rt % reaction time for the squeeze (data driven value)
+        rt_intime % did participant respond within reaction time (data driven value)
+        squeezetime % length of time button was squeezed for (data driven value)
+        force % maximum force exerted for squeeze (data driven value)
+        falsestart % did participants false-start and respond before instructed
+        time % time associated with each value in allvec
         
         
     end
@@ -63,21 +71,31 @@ classdef task < handle
             %%
                      
             % Randomly determine stimulus positioning
-            task.loc = mod(bsxfun(@plus, randperm(4), transpose(randperm(task.ntrials))), 4) + 1;
+            task.loc = mod(bsxfun(@plus, randperm(3), transpose(randperm(task.ntrials))), 3) + 1;
             
             % Set counts for each time an option is chosen
-            task.counts = zeros(4,1);
+            task.counts = zeros(3,1);
             
             % Initialise variable to hold actions and outcome, and random choices
             task.selected = zeros(task.ntrials,1);
             task.outcome = zeros(task.ntrials,1);
-            task.random = zeros(task.ntrials,1);
 
             % Initialise variable to hold choice and RT for questions
             task.pain_pos = zeros(task.ntrials,1);
             task.pain_rt = zeros(task.ntrials,1);
             task.motiv_pos = zeros(task.ntrials,1);
             task.motiv_rt = zeros(task.ntrials,1);
+
+            % Initialise variables for squeeze section of task
+            task.allvec = cell(task.ntrials,1); 
+            task.waitvec = cell(task.ntrials,1); 
+            task.pressvec = cell(task.ntrials,1);
+            task.rt = zeros(task.ntrials,1); 
+            task.rt_intime = zeros(task.ntrials,1);
+            task.squeezetime = zeros(task.ntrials,1);
+            task.force = zeros(task.ntrials,1);
+            task.falsestart = zeros(task.ntrials,1);
+            task.time = cell(task.ntrials,1);
             
             % Set trial number for first trial 
             task.curr_trial = 0;
@@ -197,13 +215,3 @@ classdef task < handle
         end       
     end
 end
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
