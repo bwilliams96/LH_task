@@ -58,14 +58,23 @@ function [allvec, waitvec, pressvec, rt, rt_intime, squeezetime, force, falsesta
         % determine if a false start was given, note, this is data driven and
         % based on a point being < 2sd from mean
         falsestart = findchangepts(waitvec,'MaxNumChanges',3,'Statistic',"linear");
-        if (mean(waitvec) - 2*std(waitvec)) > waitvec(falsestart(2))
-            falsestart = true;
-        else
+        if length(falsestart) ~= 3 
             falsestart = false;
+        else
+            if (mean(waitvec) - 2*std(waitvec)) > waitvec(falsestart(2))
+                falsestart = true;
+            else
+                falsestart = false;
+            end
         end
-
-        squeezetime = milliseconds(time(time_length + change(3)) - time(time_length + change(1))); % record amount of time button was squeezed for
-        force = pressvec(change(1)) - pressvec(change(2));
+        
+        if length(change) == 3
+            squeezetime = milliseconds(time(time_length + change(3)) - time(time_length + change(1))); % record amount of time button was squeezed for
+            force = pressvec(change(1)) - pressvec(change(2));
+        else
+            squeezetime = nan;
+            force = nan;
+        end
         break
     end
 

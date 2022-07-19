@@ -45,7 +45,7 @@ function [allvec, waitvec, pressvec, rt, rt_intime, squeezetime, force, falsesta
     [screenXpixels, screenYpixels] = Screen('WindowSize', window);
 
     %% RUN THE FUNCTION
-    addpath(genpath('./joystick'));
+    addpath(genpath('./Functions/joystick'));
     waittime = normrnd(1, 0.005);
     max_rt = duration(0,0,2);
     [allvec, waitvec, pressvec, rt, rt_intime, squeezetime, force, falsestart, time] = squeezeptb(window, screenYpixels, waittime, max_rt);
