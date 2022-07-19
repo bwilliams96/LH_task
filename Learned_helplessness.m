@@ -71,7 +71,7 @@ function Learned_helplessness()
     %% INITAL LEARNING
     for i = 1:exp.blocks(1)
         exp.curr_trial = exp.curr_trial + 1;
-        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2);
+        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome(exp, exp.curr_trial, 1);
             img_alpha(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial));
@@ -97,7 +97,7 @@ function Learned_helplessness()
     %% REVERSAL LEARNING
     for i = 1:exp.blocks(2)
         exp.curr_trial = exp.curr_trial + 1;
-        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2);
+        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome(exp, exp.curr_trial, 2);
             img_alpha(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial));
@@ -123,7 +123,7 @@ function Learned_helplessness()
     %% DESC
     for i = 1:exp.blocks(3)
         exp.curr_trial = exp.curr_trial + 1;
-        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2);
+        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome_desc(exp, exp.curr_trial, 2, i);
             img_alpha(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial));
@@ -149,7 +149,7 @@ function Learned_helplessness()
     %% Learned helplessness
     for i = 1:exp.blocks(4)
         exp.curr_trial = exp.curr_trial + 1;
-        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2);
+        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome_lh(exp, exp.curr_trial);
             img_alpha(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial));
@@ -175,7 +175,7 @@ function Learned_helplessness()
     %% REVERSAL LEARNING 2
     for i = 1:exp.blocks(5)
         exp.curr_trial = exp.curr_trial + 1;
-        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2);
+        exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome(exp, exp.curr_trial, 3);
             img_alpha(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial));

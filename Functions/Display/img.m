@@ -17,18 +17,34 @@
 % blue, yellow, green, red)
 
 function chosen = img(img1, img2, img3, positions, window, screenXpixels, screenYpixels, time)
+    
+    keyCode = false;
+    countdown_vals = sort(1:time,'descend');
 
     stimpos{1} = [((screenXpixels/12)*2) (screenYpixels/4) ((screenXpixels/12)*4) (screenYpixels/(4/3))];
     stimpos{2} = [((screenXpixels/12)*5) (screenYpixels/4) ((screenXpixels/12)*7) (screenYpixels/(4/3))];
     stimpos{3} = [((screenXpixels/12)*8) (screenYpixels/4) ((screenXpixels/12)*10) (screenYpixels/(4/3))];
-    
-    Screen('DrawTexture', window, img1, [], stimpos{positions(1)}, 0);
-    Screen('DrawTexture', window, img2, [], stimpos{positions(2)}, 0);
-    Screen('DrawTexture', window, img3, [], stimpos{positions(3)}, 0);
-    Screen('Flip', window);
 
-    keyCode = wait4key(time);
-    disp(keyCode);
+    tStart = GetSecs;
+    while GetSecs - tStart < time
+        idx = ceil(GetSecs - tStart);
+        Screen('DrawTexture', window, img1, [], stimpos{positions(1)}, 0);
+        Screen('DrawTexture', window, img2, [], stimpos{positions(2)}, 0);
+        Screen('DrawTexture', window, img3, [], stimpos{positions(3)}, 0);
+        DrawFormattedText(window, 'Please make a choice', 'center',screenYpixels * 0.2, [0 0 0]);
+        if countdown_vals(idx) == 1
+            DrawFormattedText(window, append('Time Remaining: ', num2str(countdown_vals(idx)), ' second'), 'center', screenYpixels * 0.23, [0 0 0]);
+        else
+            DrawFormattedText(window, append('Time Remaining: ', num2str(countdown_vals(idx)), ' seconds'), 'center', screenYpixels * 0.23, [0 0 0]);
+        end
+        Screen('Flip', window);
+        [keyIsDown, ~, keyCode] = KbCheck;
+        if(keyIsDown)
+            keyCode = KbName(keyCode);
+            break
+        end
+    end
+
     if keyCode ~= false
         if keyCode == 'b'
             chosen = find(positions == 1);
