@@ -48,10 +48,15 @@ function [allvec, waitvec, pressvec, rt, rt_intime, squeezetime, force, falsesta
         % find where button was pressed and return true if it is within the
         % maximum rt, otherwise return false
         change = findchangepts(pressvec,'MaxNumChanges',3,'Statistic',"linear");
-        rt = milliseconds(time(time_length + change(1)) - go_time);
-        if time_length + change(1) <= rt_time_length
-            rt_intime = true;
-        else
+        if length(change) == 3
+            rt = milliseconds(time(time_length + change(1)) - go_time);
+            if time_length + change(1) <= rt_time_length
+                rt_intime = true;
+            else
+                rt_intime = false;
+            end
+        else 
+            rt = nan;
             rt_intime = false;
         end
     
