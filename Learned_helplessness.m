@@ -3,7 +3,7 @@ function Learned_helplessness()
     %% Miscellaneous setup
     Screen('Preference', 'SkipSyncTests', 1); %%%!!!! ONLY FOR TESTING
     KbName('UnifyKeyNames');
-    activeKeys = [KbName('b') KbName('y') KbName('g') KbName('r') KbName('t')];
+    activeKeys = [KbName('b') KbName('y') KbName('g') KbName('t')];
     RestrictKeysForKbCheck(activeKeys);
     %medoc = serialport(,9600)
     medoc = 'medoc';
@@ -55,6 +55,7 @@ function Learned_helplessness()
     img3 = Screen('MakeTexture', window, imread("img/img3.png"));
     win = Screen('MakeTexture', window, imread("img/win.png"));
     loss = Screen('MakeTexture', window, imread("img/loss.png"));
+    squeezebutton = Screen('MakeTexture', window, imread("img/grip.png"));
 
     %% Setup for ratings
     question_pain  = 'How much pain are you in?';
@@ -82,8 +83,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -93,7 +94,7 @@ function Learned_helplessness()
             if exp.outcome(exp.curr_trial) == 1
                 sendTrigger()
             end
-            img_outcome(img1, img2, img3, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial));
+            img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
     end
 
@@ -111,8 +112,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -122,7 +123,7 @@ function Learned_helplessness()
             if exp.outcome(exp.curr_trial) == 1
                 sendTrigger()
             end
-            img_outcome(img1, img2, img3, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial));
+            img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
     end
 
@@ -140,8 +141,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -151,7 +152,7 @@ function Learned_helplessness()
             if exp.outcome(exp.curr_trial) == 1
                 sendTrigger()
             end
-            img_outcome(img1, img2, img3, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial));
+            img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
     end
 
@@ -169,8 +170,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -180,7 +181,7 @@ function Learned_helplessness()
             if exp.outcome(exp.curr_trial) == 1
                 sendTrigger()
             end
-            img_outcome(img1, img2, img3, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial));
+            img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
     end
 
@@ -198,8 +199,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [KbName('a') KbName('b') KbName('r')], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -209,7 +210,7 @@ function Learned_helplessness()
             if exp.outcome(exp.curr_trial) == 1
                 sendTrigger()
             end
-            img_outcome(img1, img2, img3, win, loss, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 2, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial));
+            img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
     end
     
