@@ -5,15 +5,15 @@ function Learned_helplessness()
     KbName('UnifyKeyNames');
     activeKeys = [KbName('b') KbName('y') KbName('g') KbName('t')];
     RestrictKeysForKbCheck(activeKeys);
-    %medoc = serialport(,9600)
-    medoc = 'medoc';
+    medoc = serialport(,9600)
+    %medoc = 'medoc';
     %ListenChar(2);
     HideCursor;
 
     %% This will setup the task
     addpath(genpath('./Functions'));
-    %id = input('Enter participant ID: ', 's');
-    id = 'test' %%%!!!! THIS IS ONLY IN FOR TESTING, ALSO DELETE AND UNCOMMENT LINE 4
+    id = input('Enter participant ID: ', 's');
+    %id = 'test' %%%!!!! THIS IS ONLY IN FOR TESTING, ALSO DELETE AND UNCOMMENT LINE 4
     exp = task(id,224,[75, 25; 50, 50; 25, 75],[1, 0],[50,50,20,50,50],4);
     filename = [pwd, '/Data/', exp.id, '.mat'];
     save(filename, 'exp');
@@ -58,8 +58,8 @@ function Learned_helplessness()
     squeezebutton = Screen('MakeTexture', window, imread("img/grip.png"));
 
     %% Setup for ratings
-    question_pain  = 'How much pain are you in?';
-    question_motiv  = 'How motivated are you for pain relief?';
+    question_pain  = ['How much' '\n PAIN' '\n are you currently in?'];
+    question_motiv  = ['How' '\n MOTIVATED' '\n are you for pain relief?'];
     endPoints = {'0', '5', '10'};
     position_pain = 0;
     position_motiv = 0;
@@ -73,7 +73,7 @@ function Learned_helplessness()
     for i = 1:exp.blocks(1)
         exp.curr_trial = exp.curr_trial + 1;
         waittime = normrnd(1, 0.005);
-        max_rt = duration(0,0,2);
+        max_rt = duration(0,0,1);
         [exp.allvec{exp.curr_trial}, exp.waitvec{exp.curr_trial}, exp.pressvec{exp.curr_trial}, exp.rt(exp.curr_trial), exp.rt_intime(exp.curr_trial), exp.squeezetime(exp.curr_trial), exp.force(exp.curr_trial), exp.falsestart(exp.curr_trial), exp.time{exp.curr_trial}] = squeezeptb(window, screenYpixels, waittime, max_rt);
         exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
@@ -83,8 +83,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -102,7 +102,7 @@ function Learned_helplessness()
     for i = 1:exp.blocks(2)
         exp.curr_trial = exp.curr_trial + 1;
         waittime = normrnd(1, 0.005);
-        max_rt = duration(0,0,2);
+        max_rt = duration(0,0,1);
         [exp.allvec{exp.curr_trial}, exp.waitvec{exp.curr_trial}, exp.pressvec{exp.curr_trial}, exp.rt(exp.curr_trial), exp.rt_intime(exp.curr_trial), exp.squeezetime(exp.curr_trial), exp.force(exp.curr_trial), exp.falsestart(exp.curr_trial), exp.time{exp.curr_trial}] = squeezeptb(window, screenYpixels, waittime, max_rt);
         exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
@@ -112,8 +112,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -131,7 +131,7 @@ function Learned_helplessness()
     for i = 1:exp.blocks(3)
         exp.curr_trial = exp.curr_trial + 1;
         waittime = normrnd(1, 0.005);
-        max_rt = duration(0,0,2);
+        max_rt = duration(0,0,1);
         [exp.allvec{exp.curr_trial}, exp.waitvec{exp.curr_trial}, exp.pressvec{exp.curr_trial}, exp.rt(exp.curr_trial), exp.rt_intime(exp.curr_trial), exp.squeezetime(exp.curr_trial), exp.force(exp.curr_trial), exp.falsestart(exp.curr_trial), exp.time{exp.curr_trial}] = squeezeptb(window, screenYpixels, waittime, max_rt);
         exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
@@ -141,8 +141,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -160,7 +160,7 @@ function Learned_helplessness()
     for i = 1:exp.blocks(4)
         exp.curr_trial = exp.curr_trial + 1;
         waittime = normrnd(1, 0.005);
-        max_rt = duration(0,0,2);
+        max_rt = duration(0,0,1);
         [exp.allvec{exp.curr_trial}, exp.waitvec{exp.curr_trial}, exp.pressvec{exp.curr_trial}, exp.rt(exp.curr_trial), exp.rt_intime(exp.curr_trial), exp.squeezetime(exp.curr_trial), exp.force(exp.curr_trial), exp.falsestart(exp.curr_trial), exp.time{exp.curr_trial}] = squeezeptb(window, screenYpixels, waittime, max_rt);
         exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
@@ -170,8 +170,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
@@ -189,7 +189,7 @@ function Learned_helplessness()
     for i = 1:exp.blocks(5)
         exp.curr_trial = exp.curr_trial + 1;
         waittime = normrnd(1, 0.005);
-        max_rt = duration(0,0,2);
+        max_rt = duration(0,0,1);
         [exp.allvec{exp.curr_trial}, exp.waitvec{exp.curr_trial}, exp.pressvec{exp.curr_trial}, exp.rt(exp.curr_trial), exp.rt_intime(exp.curr_trial), exp.squeezetime(exp.curr_trial), exp.force(exp.curr_trial), exp.falsestart(exp.curr_trial), exp.time{exp.curr_trial}] = squeezeptb(window, screenYpixels, waittime, max_rt);
         exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
@@ -199,8 +199,8 @@ function Learned_helplessness()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 4);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 10, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 4);
+        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
+        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
