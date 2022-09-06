@@ -73,7 +73,7 @@ function Learned_helplessness_practice()
         exp.curr_trial = exp.curr_trial + 1;
         waittime = normrnd(1, 0.005);
         max_rt = duration(0,0,1);
-        %[exp.allvec{exp.curr_trial}, exp.waitvec{exp.curr_trial}, exp.pressvec{exp.curr_trial}, exp.rt(exp.curr_trial), exp.rt_intime(exp.curr_trial), exp.squeezetime(exp.curr_trial), exp.force(exp.curr_trial), exp.falsestart(exp.curr_trial), exp.time{exp.curr_trial}] = squeezeptb(window, screenYpixels, waittime, max_rt);
+        [exp.allvec{exp.curr_trial}, exp.waitvec{exp.curr_trial}, exp.pressvec{exp.curr_trial}, exp.rt(exp.curr_trial), exp.rt_intime(exp.curr_trial), exp.squeezetime(exp.curr_trial), exp.force(exp.curr_trial), exp.falsestart(exp.curr_trial), exp.time{exp.curr_trial}] = squeezeptb(window, screenYpixels, waittime, max_rt);
         exp.selected(exp.curr_trial) = img(img1, img2, img3, exp.loc(exp.curr_trial,:), window, screenXpixels, screenYpixels, 10);
         if exp.selected(exp.curr_trial) ~= 0
             exp = getOutcome(exp, exp.curr_trial, 1);
