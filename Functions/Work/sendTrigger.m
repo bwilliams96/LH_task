@@ -5,5 +5,5 @@
 % using the serialport function
 
 function sendTrigger(device)
-    %write(device,'t',"char");
-    disp('t'); %only in for testing purposes when no serial port configured
+    write(device,'t',"char");
+    %disp('t'); %only in for testing purposes when no serial port configured

@@ -46,11 +46,11 @@ function chosen = img(img1, img2, img3, positions, window, screenXpixels, screen
     end
 
     if keyCode ~= false
-        if keyCode == 'b'
+        if keyCode == 'a'
             chosen = find(positions == 1);
-        elseif keyCode == 'y'
+        elseif keyCode == 's'
             chosen = find(positions == 2);
-        elseif keyCode == 'g'
+        elseif keyCode == 'd'
             chosen = find(positions == 3);
         end
     else 

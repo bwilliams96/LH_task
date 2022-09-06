@@ -3,9 +3,9 @@ function Learned_helplessness()
     %% Miscellaneous setup
     Screen('Preference', 'SkipSyncTests', 1); %%%!!!! ONLY FOR TESTING
     KbName('UnifyKeyNames');
-    activeKeys = [KbName('b') KbName('y') KbName('g') KbName('t')];
+    activeKeys = [KbName('a') KbName('s') KbName('d') KbName('t')];
     RestrictKeysForKbCheck(activeKeys);
-    medoc = serialport(,9600)
+    medoc = serialport("COM4",2400);
     %medoc = 'medoc';
     %ListenChar(2);
     HideCursor;
@@ -40,7 +40,7 @@ function Learned_helplessness()
     
     % Do a simply calculation to calculate the luminance value for grey. This
     % will be half the luminace value for white
-    grey = white / 2;
+    grey = white / 1.5;
     
     % Open an on screen window and color it grey. 
     [window, windowRect] = PsychImaging('OpenWindow', screenNumber, grey);
@@ -92,7 +92,7 @@ function Learned_helplessness()
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
+                sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
@@ -121,7 +121,7 @@ function Learned_helplessness()
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
+                sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
@@ -150,7 +150,7 @@ function Learned_helplessness()
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
+                sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
@@ -179,7 +179,7 @@ function Learned_helplessness()
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
+                sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end
@@ -208,7 +208,7 @@ function Learned_helplessness()
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
-                sendTrigger()
+                sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
         end

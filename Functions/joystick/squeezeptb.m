@@ -27,7 +27,7 @@ function [allvec, waitvec, pressvec, rt, rt_intime, squeezetime, force, falsesta
         gate = false;
 
         % loop over response time, note, this is 1.5x maximum rt in length
-        DrawFormattedText(window, 'Squeeze!', 'center', 'center',screenYpixels * 0.75, [0 0 1]);
+        DrawFormattedText(window, 'Go!!!', 'center', 'center', [0 0.5 0]);
         Screen('Flip', window);
         while datetime(now, 'ConvertFrom','datenum', 'Format', 'HH:mm:ss.SSS') < go_time + max_rt*1.5    
             [~, y, ~, ~] = WinJoystickMex(0);
