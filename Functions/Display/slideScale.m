@@ -299,17 +299,17 @@ while answer == 0
     Screen('Flip', screenPointer);
     
     % Check if answer has been given
-    if strcmp(device, 'mouse')
-        secs = GetSecs;
-        if buttons(mouseButton) == 1
-            answer = 1;
-        end
-    elseif strcmp(device, 'keyboard')
-        [~, secs, keyCode] = KbCheck;
-        if keyCode(responseKeys(1)) == 1
-            answer = 1;
-        end
-    end
+    %if strcmp(device, 'mouse')
+    %    secs = GetSecs;
+    %    if buttons(mouseButton) == 1
+    %        answer = 1;
+    %    end
+    %elseif strcmp(device, 'keyboard')
+    %    [~, secs, keyCode] = KbCheck;
+    %    if keyCode(responseKeys(1)) == 1
+    %        answer = 1;
+    %    end
+    %end
     
     % Abort if answer takes too long
     if secs - t0 > aborttime 
