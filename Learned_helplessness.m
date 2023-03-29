@@ -1,11 +1,11 @@
 function Learned_helplessness()
-
+    clear; clc
     %% Miscellaneous setup
     Screen('Preference', 'SkipSyncTests', 1); %%%!!!! ONLY FOR TESTING
     KbName('UnifyKeyNames');
     activeKeys = [KbName('a') KbName('s') KbName('d') KbName('t')];
     RestrictKeysForKbCheck(activeKeys);
-    medoc = serialport("COM4",2400);
+    medoc = serialport("COM4",2400)
     %medoc = 'medoc';
     %ListenChar(2);
     HideCursor;

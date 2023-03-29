@@ -95,7 +95,7 @@ function [position, RT, answer] = slideScale(screenPointer, question, rect, anch
 % Default values
 center        = round([rect(3) rect(4)]/2);
 lineLength    = 10;
-width         = 3;
+width         = 6;
 scalaLength   = 0.9;
 scalaPosition = 0.65;
 sliderColor   = [255 0 0];
@@ -299,17 +299,17 @@ while answer == 0
     Screen('Flip', screenPointer);
     
     % Check if answer has been given
-    %if strcmp(device, 'mouse')
-    %    secs = GetSecs;
-    %    if buttons(mouseButton) == 1
-    %        answer = 1;
-    %    end
-    %elseif strcmp(device, 'keyboard')
-    %    [~, secs, keyCode] = KbCheck;
-    %    if keyCode(responseKeys(1)) == 1
-    %        answer = 1;
-    %    end
-    %end
+    if strcmp(device, 'mouse')
+        secs = GetSecs;
+        if buttons(mouseButton) == 1
+            answer = 1;
+        end
+    elseif strcmp(device, 'keyboard')
+        [~, secs, keyCode] = KbCheck;
+        if keyCode(responseKeys(1)) == 1
+            answer = 1;
+        end
+    end
     
     % Abort if answer takes too long
     if secs - t0 > aborttime 
