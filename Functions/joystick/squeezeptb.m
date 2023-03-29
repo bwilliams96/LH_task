@@ -9,7 +9,7 @@ function [allvec, waitvec, pressvec, rt, rt_intime, squeezetime, force, falsesta
 
     while true
         % display ready during waittime and record from joystick
-        DrawFormattedText(window, 'Ready...', 'center', 'center',screenYpixels * 0.75, [0 0 1]);
+        DrawFormattedText(window, 'Ready...', 'center', 'center',[0 0 0], [0 0 1]);
         Screen('Flip', window);
         while toc < waittime
             [~, y, ~, ~] = WinJoystickMex(0);
@@ -27,7 +27,7 @@ function [allvec, waitvec, pressvec, rt, rt_intime, squeezetime, force, falsesta
         gate = false;
 
         % loop over response time, note, this is 1.5x maximum rt in length
-        DrawFormattedText(window, 'Go!!!', 'center', 'center', [0 0.5 0]);
+        DrawFormattedText(window, 'Squeeze!', 'center', 'center', [0 0 0], [0 0 1]);
         Screen('Flip', window);
         while datetime(now, 'ConvertFrom','datenum', 'Format', 'HH:mm:ss.SSS') < go_time + max_rt*1.5    
             [~, y, ~, ~] = WinJoystickMex(0);

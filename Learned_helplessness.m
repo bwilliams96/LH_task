@@ -40,7 +40,7 @@ function Learned_helplessness()
     
     % Do a simply calculation to calculate the luminance value for grey. This
     % will be half the luminace value for white
-    grey = white / 1.5;
+    grey = white / 2;
     
     % Open an on screen window and color it grey. 
     [window, windowRect] = PsychImaging('OpenWindow', screenNumber, grey);
