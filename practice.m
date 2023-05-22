@@ -1,4 +1,4 @@
-function Learned_helplessness_practice()
+function practice()
 
     %% Miscellaneous setup
     Screen('Preference', 'SkipSyncTests', 1); %%%!!!! ONLY FOR TESTING

@@ -1,4 +1,4 @@
-function Learned_helplessness()
+function main()
     clear; clc
     %% Miscellaneous setup
     Screen('Preference', 'SkipSyncTests', 1); %%%!!!! ONLY FOR TESTING
@@ -65,7 +65,7 @@ function Learned_helplessness()
     position_motiv = 0;
 
     %% First, we will give the participant some instructions
-    instructions('These are instructions', window, screenYpixels);
+    instructions('When the trial begins, you will be firstly be instructed to squeeze the joystick\n After this you will be shown three jars, and instructed to choose one\n Use the keys A, S and D to make a selection of a jar\n The keys correspond to the position of the jar on the screen\n If you make the correct selection, you will receive relief from the thermal stimulation to your forearm\n You will then be asked how much pain you are currently in, use the A and D keys to respond on the scale\n You will also be asked how motivated you are for pain relief, use the A and D keys to respond on the scale\n Then the next trial will begin', window, screenYpixels);
     
     %% Now we will start the task
 
