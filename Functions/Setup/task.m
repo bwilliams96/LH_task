@@ -83,10 +83,12 @@ classdef task < handle
             task.outcome = zeros(task.ntrials,1);
 
             % Initialise variable to hold choice and RT for questions
-            task.pain_pos = zeros(task.ntrials,1);
-            task.pain_rt = zeros(task.ntrials,1);
-            task.motiv_pos = zeros(task.ntrials,1);
-            task.motiv_rt = zeros(task.ntrials,1);
+            task.pain_pos = NaN(task.ntrials,1);
+            task.pain_rt = NaN(task.ntrials,1);
+            task.motiv_pos = NaN(task.ntrials,1);
+            task.motiv_rt = NaN(task.ntrials,1);
+            task.agency_pos = NaN(task.ntrials,1);
+            task.agency_rt = NaN(task.ntrials,1);
 
             % Initialise variables for squeeze section of task
             task.allvec = cell(task.ntrials,1); 
