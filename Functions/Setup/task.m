@@ -12,6 +12,7 @@ classdef task < handle
         order % numbers that match each option to its corresponding out column
         counts % number of times each option has been chosen, updates on each choice
         selected % option selected on each trial
+        selected_prob % outcome probability for choice on each trial
         outcome % outcome of each trial
         learn %possible outcomes for initial and reversal learning periods
         desc %possible outcomes for descent period
@@ -80,6 +81,7 @@ classdef task < handle
             
             % Initialise variable to hold actions and outcome, and random choices
             task.selected = zeros(task.ntrials,1);
+            task.selected_prob = NaN(task.ntrials,1);
             task.outcome = zeros(task.ntrials,1);
 
             % Initialise variable to hold choice and RT for questions
