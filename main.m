@@ -5,7 +5,7 @@ function main()
     KbName('UnifyKeyNames');
     activeKeys = [KbName('a') KbName('s') KbName('d') KbName('t')];
     RestrictKeysForKbCheck(activeKeys);
-    medoc = serialport("COM4",2400)
+    medoc = serialport("COM4",2400);
     %medoc = 'medoc';
     %ListenChar(2);
     HideCursor;
@@ -13,6 +13,11 @@ function main()
     %% This will setup the task
     addpath(genpath('./Functions'));
     id = input('Enter participant ID: ', 's');
+    question_trials = 1:4:221; % Rating questions will only be asked on certain trials
+                               % defined using this variable. Note, because trial indexing
+                               % starts at 1, the number for the last trial is 221. If you
+                               % want questions on every trial set the middle number to 1.
+
     %id = 'test' %%%!!!! THIS IS ONLY IN FOR TESTING, ALSO DELETE AND UNCOMMENT LINE 4
     exp = task(id,224,[75, 25; 50, 50; 25, 75],[1, 0],[50,50,20,50,50],4);
     filename = [pwd, '/Data/', exp.id, '.mat'];
@@ -58,8 +63,9 @@ function main()
     squeezebutton = Screen('MakeTexture', window, imread("img/grip.png"));
 
     %% Setup for ratings
-    question_pain  = ['How much' '\n PAIN' '\n are you currently in?'];
-    question_motiv  = ['How' '\n MOTIVATED' '\n are you for pain relief?'];
+    question_pain  = ['At this moment how' '\n intense is your current pain?'];
+    question_motiv  = ['At this moment how' '\n motivated are you for pain relief?'];
+    question_agency = ['At this moment how' '\n much control do you feel you have over your pain relief?'];
     endPoints = {'0', '5', '10'};
     position_pain = 0;
     position_motiv = 0;
@@ -83,12 +89,17 @@ function main()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+        if ismember(exp.curr_trial, question_trials)
+            [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
+            [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [169 48 236]);
+            [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
+            exp.pain_pos(exp.curr_trial) = position_pain/10;
+            exp.pain_rt(exp.curr_trial) = RT_pain/1000;
+            exp.motiv_pos(exp.curr_trial) = position_motiv/10;
+            exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+            exp.agency_pos(exp.curr_trial) = position_agency/10;
+            exp.agency_rt(exp.curr_trial) = RT_agency/1000;
+        end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
@@ -112,12 +123,17 @@ function main()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+        if ismember(exp.curr_trial, question_trials)
+            [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
+            [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [169 48 236]);
+            [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
+            exp.pain_pos(exp.curr_trial) = position_pain/10;
+            exp.pain_rt(exp.curr_trial) = RT_pain/1000;
+            exp.motiv_pos(exp.curr_trial) = position_motiv/10;
+            exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+            exp.agency_pos(exp.curr_trial) = position_agency/10;
+            exp.agency_rt(exp.curr_trial) = RT_agency/1000;
+        end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
@@ -141,12 +157,17 @@ function main()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+        if ismember(exp.curr_trial, question_trials)
+            [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
+            [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [169 48 236]);
+            [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
+            exp.pain_pos(exp.curr_trial) = position_pain/10;
+            exp.pain_rt(exp.curr_trial) = RT_pain/1000;
+            exp.motiv_pos(exp.curr_trial) = position_motiv/10;
+            exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+            exp.agency_pos(exp.curr_trial) = position_agency/10;
+            exp.agency_rt(exp.curr_trial) = RT_agency/1000;
+        end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
@@ -170,12 +191,17 @@ function main()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+        if ismember(exp.curr_trial, question_trials)
+            [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
+            [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [169 48 236]);
+            [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
+            exp.pain_pos(exp.curr_trial) = position_pain/10;
+            exp.pain_rt(exp.curr_trial) = RT_pain/1000;
+            exp.motiv_pos(exp.curr_trial) = position_motiv/10;
+            exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+            exp.agency_pos(exp.curr_trial) = position_agency/10;
+            exp.agency_rt(exp.curr_trial) = RT_agency/1000;
+        end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
@@ -199,12 +225,17 @@ function main()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
-        exp.pain_pos(exp.curr_trial) = position_pain/10;
-        exp.pain_rt(exp.curr_trial) = RT_pain/1000;
-        exp.motiv_pos(exp.curr_trial) = position_motiv/10;
-        exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+        if ismember(exp.curr_trial, question_trials)
+            [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
+            [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [169 48 236]);
+            [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
+            exp.pain_pos(exp.curr_trial) = position_pain/10;
+            exp.pain_rt(exp.curr_trial) = RT_pain/1000;
+            exp.motiv_pos(exp.curr_trial) = position_motiv/10;
+            exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+            exp.agency_pos(exp.curr_trial) = position_agency/10;
+            exp.agency_rt(exp.curr_trial) = RT_agency/1000;
+        end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1

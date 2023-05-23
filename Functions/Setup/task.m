@@ -20,6 +20,8 @@ classdef task < handle
         pain_rt % reaction time to give pain rating in seconds
         motiv_pos % position of motivation rating [0-10]
         motiv_rt % reaction time to give motivation rating in seconds
+        agency_pos % position of agency rating [0-10]
+        agency_rt % reaction time to give agency rating in seconds
         allvec % all pressure data for button squeeze section of task
         waitvec % pressure data for button squeeze during waiting phase
         pressvec % pressure data for button squeeze during reaction phase
