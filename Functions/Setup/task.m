@@ -46,12 +46,12 @@ classdef task < handle
                 disp('Not all arguments defined, default values will be used')
                 task.id = '';
                 task.ntrials = 224;
-                task.probs = [75, 25; 
+                task.probs = [80, 20; 
                               50, 50; 
-                              25, 75];
+                              20, 80];
                 task.rewards = [1, 0];
                 task.blocks = [50,50,20,50,50];
-                task.len = 4;
+                task.len = 10;
 
             elseif nargin == 6
                 task.id = id;

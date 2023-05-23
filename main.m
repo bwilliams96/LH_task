@@ -19,7 +19,7 @@ function main()
                                % want questions on every trial set the middle number to 1.
 
     %id = 'test' %%%!!!! THIS IS ONLY IN FOR TESTING, ALSO DELETE AND UNCOMMENT LINE 4
-    exp = task(id,224,[75, 25; 50, 50; 25, 75],[1, 0],[50,50,20,50,50],4);
+    exp = task(id,224,[80, 20; 50, 50; 20, 80],[1, 0],[50,50,20,50,50],10);
     filename = [pwd, '/Data/', exp.id, '.mat'];
     save(filename, 'exp');
 
