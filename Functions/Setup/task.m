@@ -162,18 +162,16 @@ classdef task < handle
                % determine rewards for each option
                out = [];
                probs = task.len*tmp_p(i,:,1)/100;
-               for ii=1:(8/task.len) % VALUE OF 8 IS HARD CODED BUT THIS COULD BE SOFT-CODED WITH REWORKING
-                   % get rewards that are true over length task.len                   
-                   tmp = [];
-                   
-                   for iii=1:length(probs)
-                       % repeat each reward the number of required times
-                       tmp = [tmp, [repelem(task.rewards(iii), probs(iii))]];
-                       tmp = Shuffle(tmp);
-                   end
-
-                   out = [out, tmp];
+               % get rewards that are true over length task.len                   
+               tmp = [];
+               
+               for iii=1:length(probs)
+                   % repeat each reward the number of required times
+                   tmp = [tmp, [repelem(task.rewards(iii), probs(iii))]];
+                   tmp = Shuffle(tmp);
                end
+               tmp = datasample(tmp, ceil(task.blocks(3)*0.2), 'Replace', false);
+               out = [out, tmp];
                out = out.'; % converts from column to row
                one(:,i) = out;
             end
@@ -181,18 +179,16 @@ classdef task < handle
                % determine rewards for each option
                out = [];
                probs = task.len*tmp_p(i,:,2)/100;
-               for ii=1:(8/task.len) % VALUE OF 8 IS HARD CODED BUT THIS COULD BE SOFT-CODED WITH REWORKING
-                   % get rewards that are true over length task.len                   
-                   tmp = [];
-                   
-                   for iii=1:length(probs)
-                       % repeat each reward the number of required times
-                       tmp = [tmp, [repelem(task.rewards(iii), probs(iii))]];
-                       tmp = Shuffle(tmp);
-                   end
-
-                   out = [out, tmp];
+               % get rewards that are true over length task.len                   
+               tmp = [];
+               
+               for iii=1:length(probs)
+                   % repeat each reward the number of required times
+                   tmp = [tmp, [repelem(task.rewards(iii), probs(iii))]];
+                   tmp = Shuffle(tmp);
                end
+               tmp = datasample(tmp, ceil(task.blocks(3)*0.4), 'Replace', false);
+               out = [out, tmp];
                out = out.'; % converts from column to row
                two(:,i) = out;
             end
@@ -200,22 +196,21 @@ classdef task < handle
                % determine rewards for each option
                out = [];
                probs = task.len*tmp_p(i,:,3)/100;
-               for ii=1:(8/task.len) % VALUE OF 8 IS HARD CODED BUT THIS COULD BE SOFT-CODED WITH REWORKING
-                   % get rewards that are true over length task.len                   
-                   tmp = [];
-                   
-                   for iii=1:length(probs)
-                       % repeat each reward the number of required times
-                       tmp = [tmp, [repelem(task.rewards(iii), probs(iii))]];
-                       tmp = Shuffle(tmp);
-                   end
-
-                   out = [out, tmp];
+               % get rewards that are true over length task.len                   
+               tmp = [];
+               
+               for iii=1:length(probs)
+                   % repeat each reward the number of required times
+                   tmp = [tmp, [repelem(task.rewards(iii), probs(iii))]];
+                   tmp = Shuffle(tmp);
                end
+               tmp = datasample(tmp, ceil(task.blocks(3)*0.4), 'Replace', false);
+               out = [out, tmp];
                out = out.'; % converts from column to row
                three(:,i) = out;
             end
             task.desc = cat(1,one,two,three);
+            task.desc
         end       
     end
 end
