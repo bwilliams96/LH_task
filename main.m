@@ -91,7 +91,7 @@ function main()
         end
         if ismember(exp.curr_trial, question_trials)
             [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
-            [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [169 48 236]);
+            [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 0 0]);%[169 48 236]);
             [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
             exp.pain_pos(exp.curr_trial) = position_pain/10;
             exp.pain_rt(exp.curr_trial) = RT_pain/1000;
@@ -102,7 +102,7 @@ function main()
         end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
-            if exp.outcome(exp.curr_trial) == 1
+            if exp.outcome(exp.curr_trial) == 1 && exp.rt_intime(exp.curr_trial) == 1
                 sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
@@ -136,7 +136,7 @@ function main()
         end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
-            if exp.outcome(exp.curr_trial) == 1
+            if exp.outcome(exp.curr_trial) == 1 && exp.rt_intime(exp.curr_trial) == 1
                 sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
@@ -170,7 +170,7 @@ function main()
         end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
-            if exp.outcome(exp.curr_trial) == 1
+            if exp.outcome(exp.curr_trial) == 1 && exp.rt_intime(exp.curr_trial) == 1
                 sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
@@ -204,7 +204,7 @@ function main()
         end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
-            if exp.outcome(exp.curr_trial) == 1
+            if exp.outcome(exp.curr_trial) == 1 && exp.rt_intime(exp.curr_trial) == 1
                 sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
@@ -238,7 +238,7 @@ function main()
         end
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
-            if exp.outcome(exp.curr_trial) == 1
+            if exp.outcome(exp.curr_trial) == 1 && exp.rt_intime(exp.curr_trial) == 1
                 sendTrigger(medoc)
             end
             img_outcome(img1, img2, img3, win, loss, window, screenXpixels, screenYpixels, 4, exp.selected(exp.curr_trial), exp.outcome(exp.curr_trial), squeezebutton, exp.rt_intime(exp.curr_trial));
