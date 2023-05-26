@@ -13,7 +13,7 @@ function practice()
     %% This will setup the task
     addpath(genpath('./Functions'));
     id = 'practice'
-    exp = task(id,224,[75, 25; 50, 50; 25, 75],[1, 0],[50,50,20,50,50],4);
+    exp = task(id,224,[80, 20; 50, 50; 20, 80],[1, 0],[50,50,20,50,50],10);
     filename = [pwd, '/Data/', exp.id, '.mat'];
     save(filename, 'exp');
 
@@ -57,14 +57,15 @@ function practice()
     squeezebutton = Screen('MakeTexture', window, imread("img/grip.png"));
 
     %% Setup for ratings
-    question_pain  = ['How much' '\n PAIN' '\n are you currently in?'];
-    question_motiv  = ['How' '\n MOTIVATED' '\n are you for pain relief?'];
+    question_pain  = ['At this moment how \n' '\n intense is your current pain?'];
+    question_motiv  = ['At this moment how \n' '\n motivated are you for pain relief?'];
+    question_agency = ['At this moment how \n' '\n much control do you feel you have over your pain relief?'];
     endPoints = {'0', '5', '10'};
     position_pain = 0;
     position_motiv = 0;
 
     %% First, we will give the participant some instructions
-    instructions('These are instructions', window, screenYpixels);
+    instructions('When the trial begins, you will be firstly be instructed to squeeze the joystick\n After this you will be shown three jars, and instructed to choose one\n Use the keys A, S and D to make a selection of a jar\n The keys correspond to the position of the jar on the screen\n If you make the correct selection, you will receive relief from the thermal stimulation to your forearm\n You will then be asked how much pain you are currently in, use the A and D keys to respond on the scale\n You will also be asked how motivated you are for pain relief, use the A and D keys to respond on the scale\n Then the next trial will begin', window, screenYpixels);
     
     %% Now we will start the task
 
@@ -82,8 +83,9 @@ function practice()
             noresp(window, screenYpixels);
             WaitSecs(2);
         end
-        [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5);
-        [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5);
+         [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
+         [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 0 0]);%[169 48 236]);
+         [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
