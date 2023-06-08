@@ -247,4 +247,5 @@ function main()
     
     %% end of task
     ListenChar(1);
+    instructions('End of task.\n Please let the experimenter know you are finished.', window, screenYpixels);
     sca;
