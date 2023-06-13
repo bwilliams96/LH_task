@@ -5,5 +5,8 @@
 % using the serialport function
 
 function sendTrigger(device)
-    write(device,'t',"char");
-    %disp('t'); %only in for testing purposes when no serial port configured
+    if device == "medoc"
+        disp("t")
+    else
+        write(device,'t',"char");
+    end

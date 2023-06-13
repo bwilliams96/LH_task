@@ -7,7 +7,7 @@ function practice()
     RestrictKeysForKbCheck(activeKeys);
     %medoc = serialport("COM4",2400)
     medoc = 'medoc';
-    %ListenChar(2);
+    ListenChar(2);
     HideCursor;
 
     %% This will setup the task
@@ -63,6 +63,7 @@ function practice()
     endPoints = {'0', '5', '10'};
     position_pain = 0;
     position_motiv = 0;
+    position_agency = 0; 
 
     %% First, we will give the participant some instructions
     instructions('When the trial begins, you will be firstly be instructed to squeeze the joystick\n After this you will be shown three jars, and instructed to choose one\n Use the keys A, S and D to make a selection of a jar\n The keys correspond to the position of the jar on the screen\n If you make the correct selection, you will receive relief from the thermal stimulation to your forearm\n You will then be asked how much pain you are currently in, use the A and D keys to respond on the scale\n You will also be asked how motivated you are for pain relief, use the A and D keys to respond on the scale\n Then the next trial will begin', window, screenYpixels);
@@ -82,14 +83,16 @@ function practice()
         else
             noresp(window, screenYpixels);
             WaitSecs(2);
-        end
+        end 
          [position_pain, RT_pain, answer] = slideScale(window, question_pain, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_pain, 'range', 2, 'aborttime', 5, 'slidercolor', [0 211 206]);
          [position_motiv, RT_motiv, answer] = slideScale(window, question_motiv, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 0 0]);%[169 48 236]);
-         [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_motiv, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
+         [position_agency, RT_agency, answer] = slideScale(window, question_agency, windowRect, endPoints, 'device', 'keyboard', 'stepsize', 15, 'responseKeys', [activeKeys(2) activeKeys(1) activeKeys(3)], 'startposition', position_agency, 'range', 2, 'aborttime', 5, 'slidercolor', [255 180 0]);
         exp.pain_pos(exp.curr_trial) = position_pain/10;
         exp.pain_rt(exp.curr_trial) = RT_pain/1000;
         exp.motiv_pos(exp.curr_trial) = position_motiv/10;
         exp.motiv_rt(exp.curr_trial) = RT_motiv/1000;
+        exp.agency_pos(exp.curr_trial) = position_agency/10;
+        exp.agency_rt(exp.curr_trial) = RT_agency/1000;
         save(filename, 'exp');
         if exp.selected(exp.curr_trial) ~= 0
             if exp.outcome(exp.curr_trial) == 1
