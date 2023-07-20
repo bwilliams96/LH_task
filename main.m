@@ -7,12 +7,12 @@ function main()
     RestrictKeysForKbCheck(activeKeys);
     medoc = serialport("COM4",2400);
     %medoc = 'medoc';
-    %ListenChar(2);
     HideCursor;
 
     %% This will setup the task
     addpath(genpath('./Functions'));
     id = input('Enter participant ID: ', 's');
+    ListenChar(2);
     question_trials = 1:4:221; % Rating questions will only be asked on certain trials
                                % defined using this variable. Note, because trial indexing
                                % starts at 1, the number for the last trial is 221. If you
